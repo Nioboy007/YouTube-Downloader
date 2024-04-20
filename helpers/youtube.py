@@ -9,8 +9,12 @@ def get_youtube_video_id(url):
             video_id = video_id.split('&')[0]
     elif 'youtu.be' in url:
         video_id = url.split('/')[-1]
+    
+    # Print the extracted video ID
+    print("Extracted video ID:", video_id)
+    
     return video_id
-
+    
 def get_resolution_keyboard(video):
     resolutions = {}
     for stream in video.streams.filter(progressive=True):
