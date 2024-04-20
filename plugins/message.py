@@ -18,7 +18,6 @@ ABOUT_TXT = script.ABOUT_TXT
 
 
 @Client.on_message(filters.regex(r'https?:\/\/(?:www\.)?(?:m\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([a-zA-Z0-9_-]{11})$'))
-async@Client.on_message(filters.regex(r'https?:\/\/(?:www\.)?(?:m\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([a-zA-Z0-9_-]{11})$'))
 async def handle_youtube_link(bot, message):
     video_id = get_youtube_video_id(message.text)
     
