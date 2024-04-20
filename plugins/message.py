@@ -18,7 +18,7 @@ ABOUT_TXT = script.ABOUT_TXT
 
 
 
-@Client.on_message(filters.regex(r'https?://(?:www\.)?(?:youtube\.com|youtu\.be)/([^/\r\n?]+)'))
+@Client.on_message(filters.regex(r'https?://(?:www\.)?(?:youtube\.com|youtu\.be|m\.youtube\.com)/([^/\r\n?]+)'))
 async def handle_youtube_link(bot, message):
     video_id = get_youtube_video_id(message.text)
     youtube = YouTube(f'https://www.youtube.com/watch?v={video_id}')
