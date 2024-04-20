@@ -18,12 +18,23 @@ ABOUT_TXT = script.ABOUT_TXT
 
 
 @Client.on_message(filters.regex(r'https?:\/\/(?:www\.)?(?:m\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([a-zA-Z0-9_-]{11})$'))
+async@Client.on_message(filters.regex(r'https?:\/\/(?:www\.)?(?:m\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([a-zA-Z0-9_-]{11})$'))
 async def handle_youtube_link(bot, message):
     video_id = get_youtube_video_id(message.text)
+    
+    print("Extracted video ID:", video_id)  # Debugging statement
+    
     youtube = YouTube(f'https://www.youtube.com/watch?v={video_id}')
+    
+    print("YouTube object initialized successfully")  # Debugging statement
+    
     thumbnail_url = youtube.thumbnail_url
     title = youtube.title
     description = youtube.description
+    
+    print("Title:", title)  # Debugging statement
+    print("Description:", description)  # Debugging statement
+    
     formatted_text = f"<b>{title}</b>\n\n{description[:300]}{'...' if len(description) > 300 else ''} <a href='https://www.youtube.com/watch?v={video_id}''>Read more</a>\n\n\nOnly download videos that you have the right to download. Do not use this bot to download copyrighted content that you do not have permission to use.\nDo not use this bot to download content that is illegal or violates Telegram's terms of service.\nBe respectful to other users and do not use the bot to spam or harass others.\nThe bot can only download videos that are publicly available on YouTube.\nThe bot can only download videos up to a maximum file size of 2 GB.\nThe bot can only download videos that are available in a format that can be downloaded."
     resolutions = []
 
@@ -53,6 +64,7 @@ async def handle_youtube_link(bot, message):
             reply_markup=markup)
     except Exception as e:
         await bot.send_message(message.chat.id, f"Error: {e}")
+
 
 @Client.on_message(filters.regex(r"(?:(?:https?:)?//)?(?:www\.)?youtube\.com/playlist\?list=([a-zA-Z0-9_-]+)"))
 async def handle_youtube_playlist_link(bot, message):
