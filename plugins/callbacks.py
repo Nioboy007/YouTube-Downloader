@@ -102,6 +102,8 @@ async def download(client, callback_query):
     title = youtube.title
     thumbnail_url = youtube.thumbnail_url
     description = youtube.description
+    if description is None:
+        description = "No description available"
     formatted_text = f"<b>{title}</b>\n\n{description[:300]}{'...' if len(description) > 300 else ''} \n\n<b>Powerd By: @TMWAD With <a href='https://t.me/videoDefUserBot''>@videoDefUserBot</a></b>."
     # Get a list of all streams for the video
     # Replace | with -
